@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Hold Relay 7</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22%3E%3Crect width=%2216%22 height=%2216%22 fill=%22%231a2238%22/%3E%3Cpath d=%22M8 2v12M4 14h8M5 5l3-3 3 3%22 stroke=%22%2340e0d0%22 stroke-width=%221.6%22 fill=%22none%22/%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+<script type="importmap">
+{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js" } }
+</script>
+</head>
+<body>
+<div id="app"></div>
+
+<div id="hud" class="hidden">
+  <div id="topc">
+    <div id="evac">EVAC IN 8:00</div>
+    <div id="wave">WAVE 0/5</div>
+    <div class="tlbl">UPLINK TOWER</div>
+    <div class="bar big"><i id="towerFill"></i></div>
+  </div>
+  <div id="left">
+    <div class="lbl">Trooper <span id="pods"></span></div>
+    <div class="bar"><i id="hpFill"></i></div>
+    <div id="squads"></div>
+  </div>
+  <div id="right">
+    <div id="cp">0 <small>CP</small></div>
+    <div id="mode">TROOPER</div>
+  </div>
+  <div id="ammo"><span id="mag">32</span><small> / <span id="res">300</span></small><div id="gren">GRENADES ×3</div><div id="reload" class="hidden">RELOADING</div></div>
+  <div id="cross"><i></i><i></i><i></i><i></i></div>
+  <div id="hitm"></div>
+  <div id="cmdbar">
+    <div class="row">
+      <button data-sel="0">1</button><button data-sel="1">2</button><button data-sel="2">3</button>
+      <span class="sep"></span>
+      <button data-ord="move">Move <kbd>RMB</kbd></button>
+      <button data-ord="hold">Hold <kbd>H</kbd></button>
+      <button data-ord="charge">Charge <kbd>C</kbd></button>
+      <button data-ord="follow">Follow me <kbd>F</kbd></button>
+    </div>
+    <div class="row">
+      <button class="ci" data-ci="reinforce"><b>Reinforce pod</b> <kbd>Z</kbd><span class="cost"></span><i class="cdv"></i></button>
+      <button class="ci" data-ci="supply"><b>Supply pod + turret</b> <kbd>X</kbd><span class="cost"></span><i class="cdv"></i></button>
+      <button class="ci" data-ci="strike"><b>Air strike</b> <kbd>V</kbd><span class="cost"></span><i class="cdv"></i></button>
+    </div>
+  </div>
+  <div id="hint">Tab / Space: commander view · R reload · G grenade · 1-3 squad · H hold · C charge · F follow</div>
+  <div id="toast"></div>
+  <div id="flash"></div>
+</div>
+
+<div id="title" class="overlay">
+  <div class="card">
+    <div class="kicker">FRONTIER LINE · VARN-9</div>
+    <h1>HOLD RELAY 7</h1>
+    <p class="note">The Skrell hive is waking. The evac dropship lands in eight minutes. Keep the uplink tower standing until it does.</p>
+    <div class="controls">
+      <div><b>WASD</b> move · <b>Mouse</b> aim · <b>Click</b> fire · <b>R</b> reload · <b>G</b> grenade · <b>Shift</b> sprint</div>
+      <div><b>Tab / Space</b> commander view (time slows) · <b>1 2 3</b> select squad · <b>Right click</b> move</div>
+      <div><b>H</b> hold · <b>C</b> charge · <b>F</b> follow me · <b>M</b> mute</div>
+      <div>Call-ins (commander view, paid with Command Points from kills):<br><b>Z</b> reinforce pod · <b>X</b> supply pod + auto-turret · <b>V</b> air strike (drag a line, friendly fire on)</div>
+      <div>Brutes are armored in front. Flank them or call the gunship.</div>
+    </div>
+    <button id="begin">Click to deploy</button>
+    <p id="mobileNote" class="small hidden">Best on desktop with keyboard and mouse.</p>
+  </div>
+</div>
+
+<div id="end" class="overlay hidden">
+  <div class="card">
+    <h1 id="endTitle">Evac complete</h1>
+    <p id="endText"></p>
+    <button id="restart">Restart</button>
+  </div>
+</div>
+
+<script type="module" src="main.js"></script>
+</body>
+</html>
